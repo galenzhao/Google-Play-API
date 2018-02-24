@@ -7,6 +7,7 @@
 #include "login.h"
 #include "util/rand.h"
 #include "util/http.h"
+#include <iostream>
 
 using namespace playapi;
 
@@ -22,9 +23,12 @@ checkin_api::checkin_api(device_info& device) : device(device) {
 
 void checkin_api::add_auth(login_api& login) {
     auth_user user;
-    user.email = login.get_email();
+    user.email = "elf.download@gmail.com";//login.get_email();
     user.auth_cookie = login.fetch_service_auth_cookie("ac2dm", "com.google.android.gsf",
                                                        login_api::certificate::google);
+    std::cout << "email:" << user.email << std::endl
+        << "auth_cookie:" << user.auth_cookie << std::endl;
+
     assert(user.email.length() > 0 && user.auth_cookie.length() > 0);
     auth.push_back(user);
 }
